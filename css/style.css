@@ -1,0 +1,92 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+
+#contenedor{
+    background-color: lightblue;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    border: 2px solid blue;
+    margin: 8% auto 2%;
+    padding: 4%;
+    color: rgb(165, 42, 128);
+}
+
+.general{
+    background-color: lightsteelblue;
+    margin: 1% ;
+    /*padding: 2%;*/
+}
+
+table{
+    width: 90%;
+    margin: 1em auto;
+    border-collapse: collapse;
+}
+
+th, td{
+    text-align: left;
+    border-bottom: 1px solid rgb(82, 182, 168);
+    padding: 0.8em;
+}
+
+#divSucursal{
+    flex-basis: 1;
+    width: 44%;
+}
+
+#divReportes{
+    flex-basis: 1;
+    width: 44%;
+}
+
+#divVentas{
+    flex-basis: 2;
+    width: 90%;
+}
+
+.header{
+    background-color: lightslategray;
+    padding: 1em;
+}
+
+.headerVentas{
+    display: flex;
+    justify-content: space-between;
+}
+.destacados{
+    width: 90%;
+    padding-top: 5%;
+    margin: 1em auto;
+    align-content: center;
+}
+
+/*boton nueva venta*/
+#nuevaVenta{
+    background-color: lightgreen;
+    color: rgb(81, 160, 199);
+    padding: 0.8% 1%;
+    border-radius: 10px;
+}
+
+/*modal*/
+.modal{
+    width: 25%;
+    margin: 2% auto;
+}
+form{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+label{
+    width: 90%;
+    margin: 1% auto;
+}
+select{
+    width: 90%;
+    margin: 1% auto;
+}

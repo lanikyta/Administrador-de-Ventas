@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/0171034dd8.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <section id=contenedor>
+            <div class=general id= divSucursal>
+                <div class="header">
+                    <h1>Ventas por Sucursal</h1>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Sucursal</th>
+                            <th>Total Ventas</th>
+                        </tr>
+                        <tr>
+                            <td>Centro</td>
+                        </tr>
+                        <tr>
+                            <td>Caballito</td>
+                        </tr>
+                    </table>  
+                </div>
+            </div>
+            <div class=general id= divReportes>
+                <div class=header> 
+                    <h1>Reportes</h1>
+                </div>
+                <div>
+                    <div class="destacados">
+                        <p>Productos estrella: </p>
+                    </div>
+                    <div class="destacados">
+                        <p>Vendedora que mas ingresos generó:</p>
+                    </div>
+                </div>
+            </div>
+            <div class=general id= divVentas>
+                <div class="header headerVentas">
+                    <h1>Ventas</h1>
+                    <button id=nuevaVenta><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Nueva venta</button>
+                </div>
+                <div>
+                    
+                </div>
+                <table>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Vendedora</th>
+                        <th>Sucursal</th>
+                        <th>Componentes</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <tr>
+                        <td>Centro</td>
+                    </tr>
+                    <tr>
+                        <td>Caballito</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section class="modal hidden" id=modal1>
+            <div>
+                <div class=header>
+                    <h1>Agregar Venta</h1>
+                </div>
+                <div>
+                    <form action="">
+                        <label for="">Vendedora<select name="vendedora" id="vendedora">
+                            <option value=" "> </option>
+                            <option value="grace">Grace</option>
+                            <option value="ada">Ada</option>
+                            <option value="hedy">Hedy</option>
+                            <option value="sheryl">Sheryl</option>
+                        </select></label>
+                        <label for="">Componentes</label>
+                        <label for="">Sucursal<select name="sucursal" id="sucursal">
+                            <option value=" "> </option>
+                            <option value="centro">Centro</option>
+                            <option value="caballito">Caballito</option>
+                        </select></label>
+                        <label for="">Fecha</label>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="modal hidden" id=modal2>
+            <div>
+                <div class=header>
+                    <h1>Eliminar Venta</h1>
+                </div>
+                <div>
+                    <h2>¿Estás segura?</h2>
+                    <p>Esta acción no se puede revertir</p>
+                </div>
+                <div class=footer > 
+                    
+                </div>
+            </div>
+        </section>
+        <section class="overlay hidden">
+            
+        </section>
+
+
+
+        <script src="java.js"></script>
+    </body>
+</html>
