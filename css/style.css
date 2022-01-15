@@ -82,6 +82,11 @@ form{
     flex-wrap: wrap;
 
 }
+.footer{
+    background-color: lightgray;
+    text-align: right;
+}
+
 label{
     width: 90%;
     margin: 1% auto;
@@ -89,4 +94,22 @@ label{
 select{
     width: 90%;
     margin: 1% auto;
+}
+.hidden{
+    display: none;
+}
+
+.footer .button{
+    padding: 0.8% 1%;
+    border-radius: 10px;
+    margin: 2%;
+}
+.cancelar{
+    background-color: rgb(243, 222, 222);
+}
+.eliminar{
+    background-color: rgb(223, 55, 55);
+}
+#guardar{
+    background-color: lightgreen;
 }

@@ -49,7 +49,7 @@
                 <div>
                     
                 </div>
-                <table>
+                <table id="tabla1">
                     <tr>
                         <th>Fecha</th>
                         <th>Vendedora</th>
@@ -58,22 +58,17 @@
                         <th>Precio</th>
                         <th>Acciones</th>
                     </tr>
-                    <tr>
-                        <td>Centro</td>
-                    </tr>
-                    <tr>
-                        <td>Caballito</td>
-                    </tr>
+                    
                 </table>
             </div>
         </section>
-        <section class="modal hidden" id=modal1>
+        <section class="modal hidden" id=modalNueva>
             <div>
                 <div class=header>
                     <h1>Agregar Venta</h1>
                 </div>
                 <div>
-                    <form action="">
+                    <form action="" id="formNuevaVenta">
                         <label for="">Vendedora<select name="vendedora" id="vendedora">
                             <option value=" "> </option>
                             <option value="grace">Grace</option>
@@ -88,12 +83,46 @@
                             <option value="caballito">Caballito</option>
                         </select></label>
                         <label for="">Fecha</label>
-
+                        <input type="date">
                     </form>
+                </div>
+                <div class="footer">
+                    <button class="button cancelar">Cancelar</button>
+                    <input type="submit" value="Guardar" class="button" id="guardar">
                 </div>
             </div>
         </section>
-        <section class="modal hidden" id=modal2>
+        <section class="modal hidden" id=modalEdit>
+            <div>
+                <div class=header>
+                    <h1>Editar Venta</h1>
+                </div>
+                <div>
+                    <form action="" id="formNuevaVenta">
+                        <label for="">Vendedora<select name="vendedora" id="vendedora">
+                            <option value=" "> </option>
+                            <option value="grace">Grace</option>
+                            <option value="ada">Ada</option>
+                            <option value="hedy">Hedy</option>
+                            <option value="sheryl">Sheryl</option>
+                        </select></label>
+                        <label for="">Componentes</label>
+                        <label for="">Sucursal<select name="sucursal" id="sucursal">
+                            <option value=" "> </option>
+                            <option value="centro">Centro</option>
+                            <option value="caballito">Caballito</option>
+                        </select></label>
+                        <label for="">Fecha</label>
+                        <input type="date">
+                    </form>
+                </div>
+                <div class="footer">
+                    <button class="button cancelar">Cancelar</button>
+                    <input type="submit" value="Guardar" class="button" id="guardar">
+                </div>
+            </div>
+        </section>
+        <section class="modal hidden" id=modalEliminar>
             <div>
                 <div class=header>
                     <h1>Eliminar Venta</h1>
@@ -103,7 +132,8 @@
                     <p>Esta acción no se puede revertir</p>
                 </div>
                 <div class=footer > 
-                    
+                    <button class="button cancelar">Cancelar</button>
+                    <button class="button eliminar">Eliminar</button>
                 </div>
             </div>
         </section>
@@ -113,6 +143,7 @@
 
 
 
-        <script src="java.js"></script>
+        <script src="javascript/arraydatos.js"></script>
+        <script src="javascript/java.js"></script>
     </body>
 </html>
