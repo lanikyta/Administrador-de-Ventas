@@ -5,6 +5,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Gluten&family=Monoton&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/0171034dd8.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -15,16 +18,15 @@
                 </div>
                 <div>
                     <table>
-                        <tr>
-                            <th>Sucursal</th>
-                            <th>Total Ventas</th>
-                        </tr>
-                        <tr>
-                            <td>Centro</td>
-                        </tr>
-                        <tr>
-                            <td>Caballito</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Sucursal</th>
+                                <th>Total Ventas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaSuc">
+
+                        </tbody>
                     </table>  
                 </div>
             </div>
@@ -34,10 +36,10 @@
                 </div>
                 <div>
                     <div class="destacados">
-                        <p>Productos estrella: </p>
+                        <p>Productos estrella: <span id="prodEstr"></span></p>
                     </div>
                     <div class="destacados">
-                        <p>Vendedora que mas ingresos generó:</p>
+                        <p>Vendedora que mas ingresos generó: <span id="vendMejor"></span></p>
                     </div>
                 </div>
             </div>
@@ -49,16 +51,31 @@
                 <div>
                     
                 </div>
-                <table id="tabla1">
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Vendedora</th>
-                        <th>Sucursal</th>
-                        <th>Componentes</th>
-                        <th>Precio</th>
-                        <th>Acciones</th>
-                    </tr>
-                    
+                <table id="tablaVentas">
+                    <thead id="thead">
+                        <tr id="encabezadoTabla">
+                            <th id="tablaFecha">Fecha</th>
+                            <th id="tablaVendedora">Vendedora</th>
+                            <th id="tablaComponentes">Componentes</th>
+                            <th id="tablaSucursal">Sucursal</th>
+                            <th id="tablaPrecio">Precio</th>
+                            <th id="tablaAcciones">Acciones</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span><button class="btnacciones verde">&nbsp;<i class="fas fa-edit"></i>&nbsp;</button></span>
+                                <span><button class="btnacciones rojo"><i class="fas fa-trash-alt"></i></button></span>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
                 </table>
             </div>
         </section>
@@ -69,26 +86,37 @@
                 </div>
                 <div>
                     <form action="" id="formNuevaVenta">
-                        <label for="">Vendedora<select name="vendedora" id="vendedora">
+                        <label for="">Vendedora</label>
+                        <select name="vendedora" id="vendedora">
                             <option value=" "> </option>
-                            <option value="grace">Grace</option>
-                            <option value="ada">Ada</option>
-                            <option value="hedy">Hedy</option>
-                            <option value="sheryl">Sheryl</option>
-                        </select></label>
+                            <option value="Grace">Grace</option>
+                            <option value="Ada">Ada</option>
+                            <option value="Hedy">Hedy</option>
+                            <option value="Sheryl">Sheryl</option>
+                        </select>
                         <label for="">Componentes</label>
-                        <label for="">Sucursal<select name="sucursal" id="sucursal">
+                        <select name="componentes" id="componentes" size="4" multiple="multiple">
+                            <option value="Monitor GPRS 3000">Monitor GPRS 3000</option>
+                            <option value="Motherboard ASUS 1500">Motherboard ASUS 1500</option>
+                            <option value="Monitor ASC 543">Monitor ASC 543</option>
+                            <option value="Motherboard ASUS 1200">Motherboard ASUS 1200</option>
+                            <option value="Motherboard MZI">Motherboard MZI</option>
+                            <option value="HDD Toyiva">HDD Toyiva</option>
+                            <option value="HDD Wezter Dishital">HDD Wezter Dishital</option>
+                            <option value="RAM Quinston">RAM Quinston</option>
+                        </select>
+                        <select name="sucursal" id="sucursal">
                             <option value=" "> </option>
-                            <option value="centro">Centro</option>
-                            <option value="caballito">Caballito</option>
-                        </select></label>
+                            <option value="Centro">Centro</option>
+                            <option value="Caballito">Caballito</option>
+                        </select>
                         <label for="">Fecha</label>
-                        <input type="date">
+                        <input type="date" id="fecha">
                     </form>
                 </div>
                 <div class="footer">
-                    <button class="button cancelar">Cancelar</button>
-                    <input type="submit" value="Guardar" class="button" id="guardar">
+                    <button class="button cancelar" id="cancelarVenta">Cancelar</button>
+                    <input type="submit" value="Guardar" class="button green" id="btnguardar">
                 </div>
             </div>
         </section>
@@ -98,27 +126,30 @@
                     <h1>Editar Venta</h1>
                 </div>
                 <div>
-                    <form action="" id="formNuevaVenta">
-                        <label for="">Vendedora<select name="vendedora" id="vendedora">
+                    <form action="" id="formEditVenta">
+                        <label for="">Vendedora</label>
+                        <select name="vendedoraE" id="vendedoraE">
                             <option value=" "> </option>
                             <option value="grace">Grace</option>
                             <option value="ada">Ada</option>
                             <option value="hedy">Hedy</option>
                             <option value="sheryl">Sheryl</option>
-                        </select></label>
+                        </select>
                         <label for="">Componentes</label>
-                        <label for="">Sucursal<select name="sucursal" id="sucursal">
+                        <select name="componenetes" id="componenetesE"></select>
+                        <label for="">Sucursal</label>
+                        <select name="sucursal" id="sucursalE">
                             <option value=" "> </option>
                             <option value="centro">Centro</option>
                             <option value="caballito">Caballito</option>
-                        </select></label>
-                        <label for="">Fecha</label>
-                        <input type="date">
+                        </select>
+                        <label for="" >Fecha</label>
+                        <input type="date" id="fechaE">
                     </form>
                 </div>
                 <div class="footer">
                     <button class="button cancelar">Cancelar</button>
-                    <input type="submit" value="Guardar" class="button" id="guardar">
+                    <input type="submit" value="Editar" class="button green" id="btneditar">
                 </div>
             </div>
         </section>
@@ -143,7 +174,7 @@
 
 
 
-        <script src="javascript/arraydatos.js"></script>
-        <script src="javascript/java.js"></script>
+        <script src="javascript/nuevosdatos.js"></script>
+        <script src="javascript/javanuevo.js"></script>
     </body>
 </html>
