@@ -81,6 +81,14 @@ const vendedoraHistorica = ()=> {
     } 
 }return vendedoraMayor
 }
+//asdasdasd
+/*const cambiarMap=()=> {
+     const fechaModif = 
+console.log(ventas)
+
+console.log(fechaModif)
+}
+cambiarMap()*/
 //Cargar datos tabla ventas por sucursal
 const crearTablaVentasSucursal=()=>{
     /*ventas ventasCentro.innerHTML=""*/
@@ -172,4 +180,3 @@ const agregarLaVenta=()=>{
    ventas.push(objNuevaVenta)
 }
 
-/*ventas.map (venta=>venta.fecha.toLocaleDateString())*/
