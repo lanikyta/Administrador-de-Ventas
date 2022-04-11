@@ -1,11 +1,6 @@
 //VARIABLES GLOBALES
-const btnNuevaVenta = document.getElementById('nuevaVenta')
 const modalVenta = document.getElementById('modalNueva')
-const cancelarBtn = document.querySelectorAll('.cancelar')
 const modalEditar = document.getElementById('modalEdit')
-const btnEditar = document.querySelectorAll('.verde')
-const btnEliminar = document.querySelectorAll('.rojo')
-const submitGuardar = document.getElementById('btnguardar')
 const modalEliminar = document.getElementById('modalEliminar')//no funciona equisde
 const vendedoraMejor = document.getElementById('vendMejor')
 const prodEstrella = document.getElementById('prodEstr')
@@ -81,50 +76,63 @@ const vendedoraHistorica = ()=> {
     } 
 }return vendedoraMayor
 }
-//asdasdasd
-/*const cambiarMap=()=> {
-     const fechaModif = 
-console.log(ventas)
-
-console.log(fechaModif)
+//modificar fecha
+const formatDateToString1 = (date) =>{
+    var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    var anio = date.getFullYear()
+    var mm = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
+              
+    return `${dd}/${mm}/${anio}`
 }
-cambiarMap()*/
+const formatDateToString2 = (date) =>{
+    var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    var anio = date.getFullYear()
+    var mm = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
+              
+    return `${anio}-${mm}-${dd}`
+}
 //Cargar datos tabla ventas por sucursal
 const crearTablaVentasSucursal=()=>{
-    /*ventas ventasCentro.innerHTML=""*/
+    tablaVentaSuc.innerHTML=""
     for (const sucursal of sucursales){
             tablaVentaSuc.innerHTML += `<td>${sucursal}</td>`+`<td>$${ventasSucursal(sucursal)}<td>`
     }
 }
-crearTablaVentasSucursal()
-//Cargar datos Producto Estrella:
-const cargarDatoProductoEstrella = ()=>{
+
+//Cargar datos mejor vendedora y Cargar datos Producto Estrella:
+const cargarDatosRender = ()=>{
     prodEstrella.innerHTML= `${componenteMasVendido()}`
-}
-cargarDatoProductoEstrella()
-//Cargar datos mejor vendedora 
-const mejorVendedora = ()=>{
     vendedoraMejor.innerHTML= `${vendedoraHistorica()}`
 }
-mejorVendedora()
 //Cargar datos tabla VENTAS
-
 const crearTablaVentas=()=>{
     tablaVentas.innerHTML=""
     for(let i = 0; i < ventas.length; i++){
         const crearFilasTabla=document.createElement('tr')
         tablaVentas.appendChild(crearFilasTabla);
-            crearFilasTabla.innerHTML = `<td>${ventas[i].fecha.toLocaleDateString()}</td>` + `<td>${ventas[i].nombreVendedora}</td>` + `<td>${ventas[i].componentes}</td>` + `<td>${ventas[i].sucursal}</td>` + `<td>$${precioMaquina(ventas[i].componentes)}</td>`
+            crearFilasTabla.innerHTML = `<td>${formatDateToString1(ventas[i].fecha)}</td>` + `<td>${ventas[i].nombreVendedora}</td>` + `<td>${ventas[i].componentes}</td>` + `<td>${ventas[i].sucursal}</td>` + `<td>$${precioMaquina(ventas[i].componentes)}</td>` + `<td><button id="${i}" class="btnacciones verde">&nbsp;<i class="fas fa-edit"></i>&nbsp;</button>
+            <button id="${i}" class="btnacciones rojo"><i class="fas fa-trash-alt"></i></button></td>`
     }
+    crearTablaVentasSucursal()
+    cargarDatosRender()
 }
 crearTablaVentas()
-
+//limpiar formulario
+const limpiarFormulario=()=> {
+    document.getElementById('formEditVenta').reset()
+    document.getElementById('formNuevaVenta').reset()
+  }
 //funcionalidad botones
+const btnNuevaVenta = document.getElementById('nuevaVenta')
+let cancelarBtn = document.querySelectorAll('.cancelar')
+let submitGuardar = document.getElementById('btnguardar')
+let btnEliminar = document.querySelectorAll('.rojo')//asdasdasdasdasdasdadsdasdasdasd
+//NUEVA VENTA
 btnNuevaVenta.addEventListener('click',()=>{
     modalVenta.classList.remove('hidden')
     overlay.classList.remove('hidden')
 })
-
+//CANCELAR
 const presionarCancelar = ()=>{
     modalVenta.classList.add('hidden')
     modalEditar.classList.add('hidden')
@@ -133,24 +141,28 @@ const presionarCancelar = ()=>{
 for (let t=0; t<cancelarBtn.length;t++){
     cancelarBtn[t].addEventListener('click', presionarCancelar)
 }
-//tabla
-//boton editar
-const showEditar = ()=>{
-    modalEditar.classList.remove('hidden')
-    overlay.classList.remove('hidden')
-}
-for (let r=0; r<btnEditar.length;r++){
-    btnEditar[r].addEventListener('click', showEditar)
-}
+// ABRIR EDITAR
+const recargarListaBotones = ()=>{
+    let btnEditar = document.querySelectorAll('.verde')
+    for (let r=0; r<btnEditar.length;r++){
+        btnEditar[r].addEventListener('click', (e)=>{
+            modalEditar.classList.remove('hidden')
+            overlay.classList.remove('hidden')
+            let idBoton = btnEditar[r].getAttribute("id")
+            editarVenta(idBoton)
+        })
+        
+}}
+recargarListaBotones()
+//BOTON EDITAR
+let submitEditar = document.getElementById('btneditar')
 
 //Guardar info
 var selectVendedora = document.getElementById('vendedora')
 var selectComponentes = document.querySelector('#componentes')
 var selectSucursal = document.getElementById('sucursal')
 var selectFecha = document.getElementById('fecha')
-
 let vendedora, sucursal, componentesVenta, fecha;
-
 const getData=()=>{
     vendedora = selectVendedora.value
     //componentescompra
@@ -160,8 +172,8 @@ const getData=()=>{
     }
     sucursal = selectSucursal.value
     fecha = selectFecha.value
+    console.log(selectComponentes)
 }
-
 //boton guardar
 submitGuardar.addEventListener('click', (e)=>{
     /*e.preventDefault()*/
@@ -170,7 +182,8 @@ submitGuardar.addEventListener('click', (e)=>{
     modalVenta.classList.add('hidden')
     overlay.classList.add('hidden')
     crearTablaVentas()
-   
+    recargarListaBotones()
+    limpiarFormulario()
 })
 
 //recorrer y pushear ventas
@@ -180,3 +193,27 @@ const agregarLaVenta=()=>{
    ventas.push(objNuevaVenta)
 }
 
+//EDITAR VENTAS
+const editarVenta = (id)=>{
+    var selectVendedora = document.getElementById('vendedoraE')
+    var selectComponentes = document.getElementById('componentesE')
+    var selectSucursal = document.getElementById('sucursalE')
+    var selectFecha = document.getElementById('fechaE')
+
+        selectFecha.value = `${formatDateToString2(ventas[id].fecha)}`
+        for(const option of selectVendedora){
+            if(option.value===ventas[id].nombreVendedora){
+                option.selected = true
+            }}
+        for(const option of selectSucursal){
+            if(option.value===ventas[id].sucursal){
+                option.selected = true
+            }}
+        for(const option of selectComponentes){
+            for(const componente of ventas[id].componentes){
+                if(option.value===componente){
+                option.selected = true 
+                }
+            }
+        } 
+}
