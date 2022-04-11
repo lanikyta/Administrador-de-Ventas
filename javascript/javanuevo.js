@@ -110,8 +110,7 @@ const crearTablaVentas=()=>{
     for(let i = 0; i < ventas.length; i++){
         const crearFilasTabla=document.createElement('tr')
         tablaVentas.appendChild(crearFilasTabla);
-            crearFilasTabla.innerHTML = `<td>${formatDateToString1(ventas[i].fecha)}</td>` + `<td>${ventas[i].nombreVendedora}</td>` + `<td>${ventas[i].componentes}</td>` + `<td>${ventas[i].sucursal}</td>` + `<td>$${precioMaquina(ventas[i].componentes)}</td>` + `<td><button id="${i}" class="btnacciones verde">&nbsp;<i class="fas fa-edit"></i>&nbsp;</button>
-            <button id="${i}" class="btnacciones rojo"><i class="fas fa-trash-alt"></i></button></td>`
+            crearFilasTabla.innerHTML = `<td>${formatDateToString1(ventas[i].fecha)}</td>` + `<td>${ventas[i].nombreVendedora}</td>` + `<td>${ventas[i].componentes}</td>` + `<td>${ventas[i].sucursal}</td>` + `<td>$${precioMaquina(ventas[i].componentes)}</td>` + `<td><button id="${i}" class="btnacciones verde">&nbsp;<i class="fas fa-edit"></i>&nbsp;</button><button id="${i}" class="btnacciones rojo"><i class="fas fa-trash-alt"></i></button></td>`
     }
     crearTablaVentasSucursal()
     cargarDatosRender()
@@ -126,7 +125,7 @@ const limpiarFormulario=()=> {
 const btnNuevaVenta = document.getElementById('nuevaVenta')
 let cancelarBtn = document.querySelectorAll('.cancelar')
 let submitGuardar = document.getElementById('btnguardar')
-let btnEliminar = document.querySelectorAll('.rojo')//asdasdasdasdasdasdadsdasdasdasd
+
 //NUEVA VENTA
 btnNuevaVenta.addEventListener('click',()=>{
     modalVenta.classList.remove('hidden')
@@ -136,6 +135,7 @@ btnNuevaVenta.addEventListener('click',()=>{
 const presionarCancelar = ()=>{
     modalVenta.classList.add('hidden')
     modalEditar.classList.add('hidden')
+    modalEliminar.classList.add('hidden')
     overlay.classList.add('hidden')
 }
 for (let t=0; t<cancelarBtn.length;t++){
@@ -143,7 +143,7 @@ for (let t=0; t<cancelarBtn.length;t++){
 }
 // ABRIR EDITAR
 let idBoton = ""
-const recargarListaBotones = ()=>{
+const recargarListaBotonesV = ()=>{
     let btnEditar = document.querySelectorAll('.verde')
     for (let r=0; r<btnEditar.length;r++){
         btnEditar[r].addEventListener('click', (e)=>{
@@ -154,7 +154,7 @@ const recargarListaBotones = ()=>{
         })
         
 }}
-recargarListaBotones()
+recargarListaBotonesV()
 //BOTON EDITAR
 let submitEditar = document.getElementById('btneditar')
 submitEditar.addEventListener('click', (e)=>{
@@ -162,11 +162,45 @@ submitEditar.addEventListener('click', (e)=>{
     editarVenta(idBoton)    
     modalEditar.classList.add('hidden')
     overlay.classList.add('hidden')
-    console.log(ventas)
     crearTablaVentas()
     limpiarFormulario()
-    recargarListaBotones()
+    recargarListaBotonesV()
+    recargarListaBotonesR()
 })
+//Boton Abrir Eliminar
+const recargarListaBotonesR = ()=>{
+    let btnBasurero = document.querySelectorAll('.rojo')
+    for (let r=0; r<btnBasurero.length;r++){
+        btnBasurero[r].addEventListener('click', (e)=>{
+            modalEliminar.classList.remove('hidden')
+            overlay.classList.remove('hidden')
+            idBoton = btnBasurero[r].getAttribute("id")
+        })
+}}
+recargarListaBotonesR()
+//BOTON ELIMINAR
+const btnEliminar = document.getElementById('btneliminar')
+btnEliminar.addEventListener('click', (e)=>{
+    modalEliminar.classList.add('hidden')
+    overlay.classList.add('hidden')
+    console.log(ventas)
+    ventas.splice(idBoton,1)
+    console.log(ventas)
+    crearTablaVentas()
+    recargarListaBotonesR()
+    recargarListaBotonesV()
+})
+//boton guardar
+submitGuardar.addEventListener('click', (e)=>{
+    getData()
+    agregarLaVenta()
+    modalVenta.classList.add('hidden')
+    overlay.classList.add('hidden')
+    crearTablaVentas()
+    recargarListaBotonesV()
+    limpiarFormulario()
+})
+//FUNCIONALIDAD
 //Guardar info
 var selectVendedora = document.getElementById('vendedora')
 var selectComponentes = document.querySelector('#componentes')
@@ -183,25 +217,12 @@ const getData=()=>{
     sucursal = selectSucursal.value
     fecha = selectFecha.value
 }
-//boton guardar
-submitGuardar.addEventListener('click', (e)=>{
-    /*e.preventDefault()*/
-    getData()
-    agregarLaVenta()
-    modalVenta.classList.add('hidden')
-    overlay.classList.add('hidden')
-    crearTablaVentas()
-    recargarListaBotones()
-    limpiarFormulario()
-})
-
-//recorrer y pushear ventas
+//Pushear Nueva Venta
 let objNuevaVenta = {}
 const agregarLaVenta=()=>{
     objNuevaVenta = {fecha: new Date (fecha), nombreVendedora: vendedora, componentes: componentesVenta, sucursal: sucursal}
    ventas.push(objNuevaVenta)
 }
-
 //MODAL EDITAR VENTAS
 var selectVendedoraE = document.getElementById('vendedoraE')
 var selectComponentesE = document.getElementById('componentesE')
