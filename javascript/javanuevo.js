@@ -142,21 +142,31 @@ for (let t=0; t<cancelarBtn.length;t++){
     cancelarBtn[t].addEventListener('click', presionarCancelar)
 }
 // ABRIR EDITAR
+let idBoton = ""
 const recargarListaBotones = ()=>{
     let btnEditar = document.querySelectorAll('.verde')
     for (let r=0; r<btnEditar.length;r++){
         btnEditar[r].addEventListener('click', (e)=>{
             modalEditar.classList.remove('hidden')
             overlay.classList.remove('hidden')
-            let idBoton = btnEditar[r].getAttribute("id")
-            editarVenta(idBoton)
+            idBoton = btnEditar[r].getAttribute("id")
+            showEditarVenta(idBoton)
         })
         
 }}
 recargarListaBotones()
 //BOTON EDITAR
 let submitEditar = document.getElementById('btneditar')
-
+submitEditar.addEventListener('click', (e)=>{
+    getDataEditVenta()
+    editarVenta(idBoton)    
+    modalEditar.classList.add('hidden')
+    overlay.classList.add('hidden')
+    console.log(ventas)
+    crearTablaVentas()
+    limpiarFormulario()
+    recargarListaBotones()
+})
 //Guardar info
 var selectVendedora = document.getElementById('vendedora')
 var selectComponentes = document.querySelector('#componentes')
@@ -172,7 +182,6 @@ const getData=()=>{
     }
     sucursal = selectSucursal.value
     fecha = selectFecha.value
-    console.log(selectComponentes)
 }
 //boton guardar
 submitGuardar.addEventListener('click', (e)=>{
@@ -193,27 +202,42 @@ const agregarLaVenta=()=>{
    ventas.push(objNuevaVenta)
 }
 
-//EDITAR VENTAS
-const editarVenta = (id)=>{
-    var selectVendedora = document.getElementById('vendedoraE')
-    var selectComponentes = document.getElementById('componentesE')
-    var selectSucursal = document.getElementById('sucursalE')
-    var selectFecha = document.getElementById('fechaE')
-
-        selectFecha.value = `${formatDateToString2(ventas[id].fecha)}`
-        for(const option of selectVendedora){
+//MODAL EDITAR VENTAS
+var selectVendedoraE = document.getElementById('vendedoraE')
+var selectComponentesE = document.getElementById('componentesE')
+var selectSucursalE = document.getElementById('sucursalE')
+var selectFechaE = document.getElementById('fechaE')
+let vendedoraE, sucursalE, componentesVentaE, fechaE;
+const showEditarVenta = (id)=>{
+        selectFechaE.value = `${formatDateToString2(ventas[id].fecha)}`
+        for(const option of selectVendedoraE){
             if(option.value===ventas[id].nombreVendedora){
                 option.selected = true
             }}
-        for(const option of selectSucursal){
+        for(const option of selectSucursalE){
             if(option.value===ventas[id].sucursal){
                 option.selected = true
             }}
-        for(const option of selectComponentes){
+        for(const option of selectComponentesE){
             for(const componente of ventas[id].componentes){
                 if(option.value===componente){
                 option.selected = true 
                 }
             }
-        } 
+        }}
+//EDITAR(modificar) VENTA
+const getDataEditVenta = () =>{
+    vendedoraE = selectVendedoraE.value
+    //componentescompra
+    componentesVentaE = []
+    for (let x = 0; x < selectComponentesE.selectedOptions.length; x++) {
+            componentesVentaE[x]=(selectComponentesE.selectedOptions[x].value)
+    }
+    sucursalE = selectSucursalE.value
+    fechaE = selectFechaE.value
+}
+let objEditVenta = {}
+const editarVenta = (id) =>{
+    objEditVenta = {fecha: new Date (fechaE), nombreVendedora: vendedoraE, componentes: componentesVentaE, sucursal: sucursalE}
+    ventas[id]=objEditVenta
 }
