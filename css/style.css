@@ -116,7 +116,6 @@ span{
 form{
     display: flex;
     flex-wrap: wrap;
-
 }
 .footer{
     background-color: rgba(56, 219, 219, 0.534);
@@ -124,14 +123,19 @@ form{
     border-radius: 10px;
     box-shadow: 1px 1px 20px 12px #35c0b4;
 }
-
+input{
+    margin: 1% 5%;
+    background-color: rgb(243, 193, 201);
+}
 label{
     width: 90%;
     margin: 1% auto;
+
 }
 select{
     width: 90%;
     margin: 1% auto;
+    background-color: rgb(243, 193, 201);
 }
 .hidden{
     display: none;

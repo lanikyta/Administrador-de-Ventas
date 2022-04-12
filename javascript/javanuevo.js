@@ -196,6 +196,7 @@ submitGuardar.addEventListener('click', (e)=>{
     overlay.classList.add('hidden')
     crearTablaVentas()
     recargarListaBotonesV()
+    recargarListaBotonesR()
     limpiarFormulario()
 })
 //FUNCIONALIDAD
