@@ -26,21 +26,30 @@ const contador = (array) =>{
 }
 const cantidadVentasComponente = (componente) => {
     let cantidadComponente = 0;
-    for (let venta of ventas){
-        for (let parteVenta of venta.componentes){
+    for (const venta of ventas){
+        for (const parteVenta of venta.componentes){
         parteVenta === componente ? cantidadComponente += 1 : false
     }}
     return cantidadComponente
 }
 const ventasPorVendedora = (nombreVendedora)=> ventas.filter(venta => venta.nombreVendedora === nombreVendedora)
+//ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
+ventasVendedora = (nombre)=> contador(ventasPorVendedora(nombre))
+//console.log(ventasVendedora("Ada"))
 const ventasSucursal = (sucursal) => contador(ventas.filter(venta => venta.sucursal === sucursal))
+//Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad pero trabajando con una propiedad distinta. 
+const filtrarPor = (prop, parametro) => contador(ventas.filter(venta => venta[prop] === parametro))
+//console.log(filtrarPor('nombreVendedora', "Ada"))
 const filtrarFecha = (mes, anio) => { 
         let filtradoPorFecha = ventas.filter(venta => {
         if(venta.fecha.getMonth() === (mes-1) && venta.fecha.getFullYear() === anio){
             return true
         }})
          return filtradoPorFecha
-    }
+}
+//huboVentas(mes, anio): que indica si hubo ventas en un mes determinado
+const huboVentas = (mes, anio) => filtrarFecha(mes, anio).length > 0
+//console.log(huboVentas(1, 2020))
 //precio
 const precioMaquina = (componentes)=>{
     let sumaPreciosComponentes = 0
@@ -49,6 +58,21 @@ const precioMaquina = (componentes)=>{
     }
     return sumaPreciosComponentes
 }
+//vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. 
+const vendedoraDelMes = (mes, anio) => {
+    let cantidadAcumulada = 0
+    let vendedoraMayor =""
+    for (let vendedora of vendedoras){
+        if(cantidadAcumulada < contador((filtrarFecha(mes, anio)).filter(venta=> venta.nombreVendedora === vendedora))){
+            cantidadAcumulada = contador((filtrarFecha(mes, anio)).filter(venta=> venta.nombreVendedora === vendedora))
+            vendedoraMayor = vendedora
+    } 
+}return vendedoraMayor
+}
+//console.log(vendedoraDelMes(2, 2019))
+//ventasMes(mes, anio): Obtener las ventas de un mes. 
+const ventasMes = (mes, anio) => contador(filtrarFecha(mes, anio))
+//console.log(ventasMes(1, 2019))
 
 //Producto estrella
 const componenteMasVendido = ()=>{
@@ -70,35 +94,47 @@ const vendedoraHistorica = ()=> {
     let cantidadAcumulada = 0
     let vendedoraMayor =""
     for (let vendedora of vendedoras){
-        if(cantidadAcumulada < contador(ventasPorVendedora(vendedora))){
-            cantidadAcumulada = contador(ventasPorVendedora(vendedora))
+        if(cantidadAcumulada < ventasVendedora(vendedora)){
+            cantidadAcumulada = ventasVendedora(vendedora)
             vendedoraMayor = vendedora
     } 
 }return vendedoraMayor
 }
+//console.log(vendedoraHistorica())
+const renderPorMes = (anio) =>{
+    let meses = []
+    for (const venta of ventas.filter(venta=>venta.fecha.getFullYear()===anio)){
+        !meses.includes(venta.fecha.getMonth()+1) ? meses.push(venta.fecha.getMonth()+1) : false
+    }
+    meses.sort((a,b)=>{return a- b})
+    let acc = ""
+    for (const mes of meses){
+        acc += `<li>En el periodo ${mes}/${anio} las ganancias fueron de $${ventasMes(mes,anio)}</li>`
+    } return acc
+}
+//console.log(renderPorMes(2019))
 //modificar fecha
 const formatDateToString1 = (date) =>{
-    var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    var dd = (date.getDate() < 10 ? '0' : '') + date.getUTCDate();
     var anio = date.getFullYear()
     var mm = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
               
     return `${dd}/${mm}/${anio}`
 }
 const formatDateToString2 = (date) =>{
-    var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    var dd = (date.getDate() < 10 ? '0' : '') + date.getUTCDate();
     var anio = date.getFullYear()
     var mm = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
               
     return `${anio}-${mm}-${dd}`
 }
-//Cargar datos tabla ventas por sucursal
+//Cargar datos tabla ventas por sucursal(renderPorSucursal())
 const crearTablaVentasSucursal=()=>{
     tablaVentaSuc.innerHTML=""
     for (const sucursal of sucursales){
             tablaVentaSuc.innerHTML += `<td>${sucursal}</td>`+`<td>$${ventasSucursal(sucursal)}<td>`
     }
 }
-
 //Cargar datos mejor vendedora y Cargar datos Producto Estrella:
 const cargarDatosRender = ()=>{
     prodEstrella.innerHTML= `${componenteMasVendido()}`
@@ -130,6 +166,7 @@ let submitGuardar = document.getElementById('btnguardar')
 btnNuevaVenta.addEventListener('click',()=>{
     modalVenta.classList.remove('hidden')
     overlay.classList.remove('hidden')
+    setFechaLimite()
 })
 //CANCELAR
 const presionarCancelar = ()=>{
@@ -140,6 +177,7 @@ const presionarCancelar = ()=>{
 }
 for (let t=0; t<cancelarBtn.length;t++){
     cancelarBtn[t].addEventListener('click', presionarCancelar)
+    limpiarFormulario()
 }
 // ABRIR EDITAR
 let idBoton = ""
@@ -159,11 +197,8 @@ recargarListaBotonesV()
 let submitEditar = document.getElementById('btneditar')
 submitEditar.addEventListener('click', (e)=>{
     getDataEditVenta()
-    editarVenta(idBoton)    
-    modalEditar.classList.add('hidden')
-    overlay.classList.add('hidden')
+    validarDataEdit()
     crearTablaVentas()
-    limpiarFormulario()
     recargarListaBotonesV()
     recargarListaBotonesR()
 })
@@ -191,13 +226,10 @@ btnEliminar.addEventListener('click', (e)=>{
 //boton guardar
 submitGuardar.addEventListener('click', (e)=>{
     getData()
-    agregarLaVenta()
-    modalVenta.classList.add('hidden')
-    overlay.classList.add('hidden')
+    validarData()
     crearTablaVentas()
     recargarListaBotonesV()
     recargarListaBotonesR()
-    limpiarFormulario()
 })
 //FUNCIONALIDAD
 //Guardar info
@@ -215,6 +247,21 @@ const getData=()=>{
     }
     sucursal = selectSucursal.value
     fecha = selectFecha.value
+}
+//VALIDAR DATOS
+//Fecha limite
+fechaHoy = new Date
+const setFechaLimite = ()=>{
+    selectFecha.setAttribute('max', formatDateToString2(fechaHoy))
+}
+const validarData = ()=>{
+    if(vendedora === "" || componentesVenta.length === 0 || sucursal === "" || fecha === ""){
+        alert('Debe completar todos los campos')
+    }
+    else{agregarLaVenta()
+    modalVenta.classList.add('hidden')
+    overlay.classList.add('hidden')
+    limpiarFormulario()}
 }
 //Pushear Nueva Venta
 let objNuevaVenta = {}
@@ -255,6 +302,15 @@ const getDataEditVenta = () =>{
     }
     sucursalE = selectSucursalE.value
     fechaE = selectFechaE.value
+}
+const validarDataEdit = ()=>{
+    if(vendedoraE === "" || componentesVentaE.length === 0 || sucursalE === "" || fechaE === ""){
+        alert('Debe completar todos los campos')
+    }
+    else{editarVenta(idBoton)    
+    modalEditar.classList.add('hidden')
+    overlay.classList.add('hidden')
+    limpiarFormulario()}
 }
 let objEditVenta = {}
 const editarVenta = (id) =>{

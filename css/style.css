@@ -126,6 +126,7 @@ form{
 input{
     margin: 1% 5%;
     background-color: rgb(243, 193, 201);
+    border-radius: 10px;
 }
 label{
     width: 90%;
@@ -136,6 +137,7 @@ select{
     width: 90%;
     margin: 1% auto;
     background-color: rgb(243, 193, 201);
+    border-radius: 10px;
 }
 .hidden{
     display: none;
@@ -148,7 +150,7 @@ select{
     cursor: pointer;
 }
 .cancelar{
-    background-color: rgb(243, 222, 222);
+    background-color: rgb(224, 102, 46);
 }
 .eliminar{
     background-color: rgb(223, 55, 55);
