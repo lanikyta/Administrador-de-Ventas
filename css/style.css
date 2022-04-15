@@ -19,9 +19,11 @@ body{
     
 }
 h1{
-    color: rgb(197, 69, 107);
+    color: rgb(37, 7, 75);
     text-shadow: 7px 4px 5px rgb(95, 95, 231);
-    font-family: 'Gluten', cursive;
+    font-family: 'Rubik Moonrocks', cursive;
+    font-weight: 100;
+    font-size: 2vw;
 }
 .general{
     background-color: lightsteelblue;
@@ -39,42 +41,36 @@ table{
 }
 
 th, td, tr{
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid rgb(82, 182, 168);
     padding: 1.5%;
-    padding-left: 0.8%;
 }
-td{
-    border-spacing: 20px;
-}
-
-#divSucursal{
+.peq{
     flex-basis: 1;
     width: 44%;
 }
-
-#divReportes{
-    flex-basis: 1;
-    width: 44%;
+.sup{
+    position: absolute;
+    right: 9%;
+    flex-basis: 2;
+    width: 80%;
 }
-
 #divVentas{
     flex-basis: 2;
     width: 90%;
 }
 span{
     color:rgb(192, 12, 147);
-    font-size: 1.3vw;
+    font-size: 1.9vw;
     font-weight: bold;  
+    font-family: 'Rubik Puddles', cursive;
+
 }
 .header{
     background-color: rgb(103, 160, 216);
     padding: 1em;
     border-radius: 10px;
     box-shadow: 2px 1px 24px 19px #6093f3;
-}
-
-.headerVentas{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -85,7 +81,9 @@ span{
     margin: 1% auto;
     margin-top: 2%;
 }
-
+.sup p{
+    padding: 2%;
+}
 .overlay{
     position: fixed;
     top: 0%;
@@ -98,15 +96,19 @@ span{
 }
 
 /*boton nueva venta*/
-#nuevaVenta{
+.btngral{
     background-color: lightgreen;
     color: rgb(81, 160, 199);
     padding: 0.8% 1%;
     border-radius: 10px;
     cursor: pointer;
     font-size: 1.2vw;
+    font-family: 'Merienda', cursive;
 }
-
+.mas{
+    background-color: #35c0b4;
+    color: black;
+}
 /*modal*/
 .modal{
     width: 22em;
@@ -134,22 +136,22 @@ input{
     margin: 1% 5%;
     background-color: rgb(243, 193, 201);
     border-radius: 10px;
+    font-family: 'Merienda', cursive;
 }
 label{
     width: 90%;
-    margin: 1% auto;
-
+    margin: 2% auto;
 }
 select{
     width: 90%;
     margin: 1% auto;
     background-color: rgb(243, 193, 201);
     border-radius: 10px;
+    font-family: 'Merienda', cursive;
 }
 .hidden{
     display: none;
 }
-
 .footer .button{
     padding: 0.8% 1%;
     border-radius: 10px;
@@ -197,7 +199,10 @@ h2{
     }
     .general{
         flex-basis: 90%;
-        text-align: justify;
+        text-align: center;
+        font-size: 2vw;
+    }
+    #divVentas{
         font-size: 1.8vw;
     }
     td, th{
@@ -205,6 +210,9 @@ h2{
     }
     span{
         font-size: 2vw;
+    }
+    .sup{
+        height: 25em;
     }
     /*h1{
         font-size: 2.5rem;

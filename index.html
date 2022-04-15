@@ -7,14 +7,15 @@
         <link href="css/style.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Gluten&family=Monoton&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Gluten&family=Monoton&family=Merienda&family=Rubik+Puddles&family=Rubik+Moonrocks&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/0171034dd8.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <section class="contenedor" id=contenedor>
-            <div class=general id= divSucursal>
+            <div class="general peq" id= divSucursal>
                 <div class="header">
                     <h1>Ventas por Sucursal</h1>
+                    <button class="btngral mas" id=mas1>Mas&nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button>
                 </div>
                 <div>
                     <table>
@@ -30,9 +31,10 @@
                     </table>  
                 </div>
             </div>
-            <div class=general id= divReportes>
+            <div class="general peq" id= divReportes>
                 <div class=header> 
                     <h1>Reportes</h1>
+                    <button class="btngral mas" id=mas2>Mas&nbsp;&nbsp;<i class="fas fa-arrow-down"></i></button>
                 </div>
                 <div>
                     <div class="destacados">
@@ -43,10 +45,28 @@
                     </div>
                 </div>
             </div>
-            <div class=general id= divVentas>
+            <div class="general peq sup hidden" id="detalles1">
+                <div class="header">
+                    <h1>Reporte mensual</h1>
+                    <button class="btngral mas" id=menos1>Menos&nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button>
+                </div>
+                <div id="agregarDetalles1">
+                    
+                </div>
+            </div>
+            <div class="general peq sup hidden"id="detalles2">
+                <div class=header> 
+                    <h1>Ganancias Mensuales</h1>
+                    <button class="btngral mas" id=menos2>Menos&nbsp;&nbsp;<i class="fas fa-arrow-up"></i></button>
+                </div>
+                <div id="agregarDetalles2">
+                    
+                </div>
+            </div>
+            <div class="general" id= divVentas>
                 <div class="header headerVentas">
                     <h1>Ventas</h1>
-                    <button id=nuevaVenta><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Nueva venta</button>
+                    <button class="btngral" id=nuevaVenta><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Nueva venta</button>
                 </div>
                 <div>
                     
@@ -106,6 +126,7 @@
                             <option value="RAM Quinston">RAM Quinston</option>
                             <option value="RAM Quinston Fury">RAM Quinston Fury</option>
                         </select>
+                        <label for="">Sucursal</label>
                         <select name="sucursal" id="sucursal">
                             <option value=""> </option>
                             <option value="Centro">Centro</option>

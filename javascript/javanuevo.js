@@ -70,6 +70,17 @@ const vendedoraDelMes = (mes, anio) => {
 }return vendedoraMayor
 }
 //console.log(vendedoraDelMes(2, 2019))
+//Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina. 
+const sucursalDelMes = (mes, anio) => {
+    let cantidadAcumulada = 0
+    let sucursalMayor = ""
+    for (let sucursal of sucursales){
+        if (cantidadAcumulada < contador((filtrarFecha(mes, anio)).filter(venta => venta.sucursal === sucursal))){
+            cantidadAcumulada = contador((filtrarFecha(mes, anio)).filter(venta => venta.sucursal === sucursal))
+            sucursalMayor = sucursal
+        }
+    } return sucursalMayor
+}
 //ventasMes(mes, anio): Obtener las ventas de un mes. 
 const ventasMes = (mes, anio) => contador(filtrarFecha(mes, anio))
 //console.log(ventasMes(1, 2019))
@@ -107,10 +118,10 @@ const renderPorMes = (anio) =>{
         !meses.includes(venta.fecha.getMonth()+1) ? meses.push(venta.fecha.getMonth()+1) : false
     }
     meses.sort((a,b)=>{return a- b})
-    let acc = ""
+    
     for (const mes of meses){
-        acc += `<li>En el periodo ${mes}/${anio} las ganancias fueron de $${ventasMes(mes,anio)}</li>`
-    } return acc
+        getElId('agregarDetalles2').innerHTML += `<p>En el periodo ${mes}/${anio} las ganancias fueron de $${ventasMes(mes,anio)}</p>`
+    }
 }
 //console.log(renderPorMes(2019))
 //modificar fecha
@@ -270,10 +281,11 @@ const validarData = ()=>{
     overlay.classList.add('hidden')
     limpiarFormulario()}
 }
+corregirFecha='T00:00:00'
 //Pushear Nueva Venta
 let objNuevaVenta = {}
 const agregarLaVenta=()=>{
-    objNuevaVenta = {fecha: new Date (fecha), nombreVendedora: vendedora, componentes: componentesVenta, sucursal: sucursal}
+    objNuevaVenta = {fecha: new Date (fecha+corregirFecha), nombreVendedora: vendedora, componentes: componentesVenta, sucursal: sucursal}
    ventas.push(objNuevaVenta)
 }
 //MODAL EDITAR VENTAS
@@ -325,3 +337,26 @@ const editarVenta = (id) =>{
     objEditVenta = {fecha: new Date (fechaE), nombreVendedora: vendedoraE, componentes: componentesVentaE, sucursal: sucursalE}
     ventas[id]=objEditVenta
 }
+//Cositas que agrego porque estoy al ....
+const getElId = (id) => document.getElementById(id)
+getElId('mas2').addEventListener('click', (e)=>{
+    getElId('detalles2').classList.remove('hidden')
+    let anio=parseInt(prompt('Ingrese el año del que quiere ver el reporte (aaaa)'))
+    getElId('agregarDetalles2').innerHTML=""
+    renderPorMes(anio)
+    getElId('menos2').addEventListener('click', (e)=>{
+        getElId('detalles2').classList.add('hidden')
+    })
+})
+getElId('mas1').addEventListener('click', (e)=>{
+    getElId('detalles1').classList.remove('hidden')
+    let mes=parseInt(prompt('Ingrese un mes en formato numérico (del 1 al 12)'))
+    let anio=parseInt(prompt('Ingrese un año (aaaa)'))
+    getElId('agregarDetalles1').innerHTML=""
+    getElId('agregarDetalles1').innerHTML=`<p>La sucursal que mas vendió en el periodo ${mes}/${anio} fue ${sucursalDelMes(mes, anio)}</p>`+ `<p>La vendedora que mas vendió en el periodo ${mes}/${anio} fue ${vendedoraDelMes(mes, anio)}</p>`
+    getElId('menos1').addEventListener('click', (e)=>{
+        getElId('detalles1').classList.add('hidden')
+    }) 
+})
+
+
