@@ -271,6 +271,7 @@ const getData=()=>{
 fechaHoy = new Date
 const setFechaLimite = ()=>{
     selectFecha.setAttribute('max', formatDateToString2(fechaHoy))
+    selectFechaE.setAttribute('max', formatDateToString2(fechaHoy))
 }
 const validarData = ()=>{
     if(vendedora === "" || componentesVenta.length === 0 || sucursal === "" || fecha === ""){
