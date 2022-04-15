@@ -11,7 +11,7 @@
         <script src="https://kit.fontawesome.com/0171034dd8.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <section id=contenedor>
+        <section class="contenedor" id=contenedor>
             <div class=general id= divSucursal>
                 <div class="header">
                     <h1>Ventas por Sucursal</h1>
@@ -36,7 +36,7 @@
                 </div>
                 <div>
                     <div class="destacados">
-                        <p>Productos estrella: <span id="prodEstr"></span></p>
+                        <p>Producto estrella: <span id="prodEstr"></span></p>
                     </div>
                     <div class="destacados">
                         <p>Vendedora que mas ingresos generó: <span id="vendMejor"></span></p>
@@ -104,6 +104,7 @@
                             <option value="HDD Toyiva">HDD Toyiva</option>
                             <option value="HDD Wezter Dishital">HDD Wezter Dishital</option>
                             <option value="RAM Quinston">RAM Quinston</option>
+                            <option value="RAM Quinston Fury">RAM Quinston Fury</option>
                         </select>
                         <select name="sucursal" id="sucursal">
                             <option value=""> </option>
@@ -145,6 +146,7 @@
                             <option value="HDD Toyiva">HDD Toyiva</option>
                             <option value="HDD Wezter Dishital">HDD Wezter Dishital</option>
                             <option value="RAM Quinston">RAM Quinston</option>
+                            <option value="RAM Quinston Fury">RAM Quinston Fury</option>
                         </select>
                         <label for="">Sucursal</label>
                         <select name="sucursal" id="sucursalE">
@@ -169,7 +171,7 @@
                 </div>
                 <div>
                     <h2>¿Estás segura?</h2>
-                    <p>Esta acción no se puede revertir</p>
+                    <p class="pEliminar">Esta acción no se puede revertir</p>
                 </div>
                 <div class=footer > 
                     <button class="button cancelar">Cancelar</button>

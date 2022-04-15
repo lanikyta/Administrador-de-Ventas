@@ -168,16 +168,23 @@ btnNuevaVenta.addEventListener('click',()=>{
     overlay.classList.remove('hidden')
     setFechaLimite()
 })
+overlay.addEventListener('click', ()=>{
+    modalVenta.classList.add('hidden')
+    modalEditar.classList.add('hidden')
+    modalEliminar.classList.add('hidden')
+    overlay.classList.add('hidden')
+    limpiarFormulario()
+})
 //CANCELAR
 const presionarCancelar = ()=>{
     modalVenta.classList.add('hidden')
     modalEditar.classList.add('hidden')
     modalEliminar.classList.add('hidden')
     overlay.classList.add('hidden')
+    limpiarFormulario()
 }
 for (let t=0; t<cancelarBtn.length;t++){
     cancelarBtn[t].addEventListener('click', presionarCancelar)
-    limpiarFormulario()
 }
 // ABRIR EDITAR
 let idBoton = ""
@@ -291,7 +298,8 @@ const showEditarVenta = (id)=>{
                 option.selected = true 
                 }
             }
-        }}
+        }
+}
 //EDITAR(modificar) VENTA
 const getDataEditVenta = () =>{
     vendedoraE = selectVendedoraE.value

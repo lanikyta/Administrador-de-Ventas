@@ -5,7 +5,7 @@
 body{
     background-image: url(../img/fondo.jpg);
 }
-#contenedor{
+.contenedor{
     background-color: lightblue;
     background-image: url(../img/compritas.jpg);
     box-shadow: 2px 1px 24px 19px #3e88f7;
@@ -13,13 +13,14 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 80%;
+    width: 85%;
     margin: 1% auto 2%;
     padding: 4%;
     
 }
 h1{
-    color: rgb(219, 54, 104);
+    color: rgb(197, 69, 107);
+    text-shadow: 7px 4px 5px rgb(95, 95, 231);
     font-family: 'Gluten', cursive;
 }
 .general{
@@ -28,11 +29,11 @@ h1{
     font-family: 'Courier New', Courier, monospace;
     color: rgb(10, 36, 85);
     border-radius: 10px;
-   
+    font-size: 1.2vw;
 }
 
 table{
-    width: 90%;
+    width: 95%;
     margin: 1% auto;
     border-collapse: collapse;
 }
@@ -40,7 +41,11 @@ table{
 th, td, tr{
     text-align: left;
     border-bottom: 1px solid rgb(82, 182, 168);
-    padding: 2%;
+    padding: 1.5%;
+    padding-left: 0.8%;
+}
+td{
+    border-spacing: 20px;
 }
 
 #divSucursal{
@@ -76,9 +81,9 @@ span{
 }
 .destacados{
     width: 90%;
-    padding-top: 5%;
-    margin: 1em auto;
-    align-content: center;
+    padding: 2%;
+    margin: 1% auto;
+    margin-top: 2%;
 }
 
 .overlay{
@@ -86,7 +91,7 @@ span{
     top: 0%;
     left: 0%;
     width: 100%;
-    height: 250%;
+    height: 100%;
     background-color: rgba(145, 62, 212, 0.274);
     backdrop-filter: blur(5px);
     z-index: 101;
@@ -99,15 +104,17 @@ span{
     padding: 0.8% 1%;
     border-radius: 10px;
     cursor: pointer;
+    font-size: 1.2vw;
 }
 
 /*modal*/
 .modal{
-    width: 25%;
+    width: 22em;
     background-image: url();
     position: fixed;
     top: 15%;
-    left: 40%;
+    left: 25%;
+    right: 25%;
     margin: 0% auto;
     color: white;
     font-family: 'Gluten', cursive;
@@ -155,8 +162,15 @@ select{
 .eliminar{
     background-color: rgb(223, 55, 55);
 }
+h2{
+    margin: 4% auto;
+}
+.pEliminar{
+    margin: 4% auto;
+    padding: 2%;
+}
 .green{
-    background-color: lightgreen;
+    background-color: rgb(123, 238, 123);
 }
 .btnacciones{
     padding: 2%;
@@ -173,4 +187,78 @@ select{
 
 .rojo{
     color: rgb(223, 55, 55);
+}
+@media (max-width: 768px){
+    .contenedor{
+        flex-wrap: wrap;
+        padding: 1%;
+        padding-top: 5%;
+        width: 90%;
+    }
+    .general{
+        flex-basis: 90%;
+        text-align: justify;
+        font-size: 1.8vw;
+    }
+    td, th{
+        text-align: center;
+    }
+    span{
+        font-size: 2vw;
+    }
+    /*h1{
+        font-size: 2.5rem;
+    }
+    .segunda, .cuarta{
+        margin: 4% auto;
+        padding-top: 8%;
+        width: 90%;
+    }
+    .quinta{
+        width: 90%;
+        flex-wrap: wrap;
+    }
+    .c1{
+        width: 45%;
+        margin: 3% 1%;
+        padding: 1%;
+    }*/
+}
+@media (max-width: 425px){
+
+    .divflex{
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .primera{
+        
+        padding-top: 2%;
+    }
+    .imagen{
+        flex-basis: 75%;
+    }
+    .c1{
+        width: 75%;
+        margin: 1% auto;
+    }
+    .quinta{
+        flex-direction: column;
+        padding: 2%;
+    }
+    .columna{
+        text-align: justify;
+    }
+    .cajaform{
+        margin: 2%;
+    }
+    .columna .small{
+        flex-basis: 90%;
+    }
+    .footli{
+        display: none;
+    }
+    footer .menu{
+        display: block;
+    }
+        
 }
