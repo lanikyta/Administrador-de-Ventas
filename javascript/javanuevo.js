@@ -9,6 +9,7 @@ const overlay = document.querySelector(".overlay")
 const thTabla = document.getElementById('encabezadoTabla')
 const tablaVentas=document.getElementById('tbody')
 //AUXILIARES
+const getElId = (id) => document.getElementById(id)
 const { precios, ventas, vendedoras, sucursales} = local
 const precioComponente = (componente) =>{
     for (const precio of precios){
@@ -112,18 +113,7 @@ const vendedoraHistorica = ()=> {
 }return vendedoraMayor
 }
 //console.log(vendedoraHistorica())
-const renderPorMes = (anio) =>{
-    let meses = []
-    for (const venta of ventas.filter(venta=>venta.fecha.getFullYear()===anio)){
-        !meses.includes(venta.fecha.getMonth()+1) ? meses.push(venta.fecha.getMonth()+1) : false
-    }
-    meses.sort((a,b)=>{return a- b})
-    
-    for (const mes of meses){
-        getElId('agregarDetalles2').innerHTML += `<p>En el periodo ${mes}/${anio} las ganancias fueron de $${ventasMes(mes,anio)}</p>`
-    }
-}
-//console.log(renderPorMes(2019))
+
 //modificar fecha
 const formatDateToString1 = (date) =>{
     var dd = (date.getDate() < 10 ? '0' : '') + date.getUTCDate();
@@ -206,6 +196,7 @@ const recargarListaBotonesV = ()=>{
             modalEditar.classList.remove('hidden')
             overlay.classList.remove('hidden')
             idBoton = btnEditar[r].getAttribute("id")
+            setFechaLimite()
             showEditarVenta(idBoton)
         })
         
@@ -338,12 +329,29 @@ const editarVenta = (id) =>{
     objEditVenta = {fecha: new Date (fechaE), nombreVendedora: vendedoraE, componentes: componentesVentaE, sucursal: sucursalE}
     ventas[id]=objEditVenta
 }
+
+
+const renderPorMes = (anio) =>{
+    let meses = []
+    
+    for (const venta of ventas.filter(venta=>venta.fecha.getFullYear()===anio)){
+        !meses.includes(venta.fecha.getMonth()+1) ? meses.push(venta.fecha.getMonth()+1) : false
+    }
+    meses.sort((a,b)=>{return a- b})
+    let acc = ""
+    for (const mes of meses){
+        acc += `<li>En el periodo ${mes}/${anio} las ganancias fueron de $${ventasMes(mes,anio)}</li>`
+    }
+    if(acc!=""){
+        getElId('agregarDetalles2').innerHTML = acc
+    }else{getElId('agregarDetalles2').innerHTML=`<p>No se registraron ventas en ese año</p>`}
+}
+//console.log(renderPorMes(2019))
 //Cositas que agrego porque estoy al ....
-const getElId = (id) => document.getElementById(id)
+
 getElId('mas2').addEventListener('click', (e)=>{
     getElId('detalles2').classList.remove('hidden')
-    let anio=parseInt(prompt('Ingrese el año del que quiere ver el reporte (aaaa)'))
-    getElId('agregarDetalles2').innerHTML=""
+    let anio=parseInt(prompt('Ingrese el año del que desea ver el reporte (aaaa)'))
     renderPorMes(anio)
     getElId('menos2').addEventListener('click', (e)=>{
         getElId('detalles2').classList.add('hidden')
@@ -353,11 +361,13 @@ getElId('mas1').addEventListener('click', (e)=>{
     getElId('detalles1').classList.remove('hidden')
     let mes=parseInt(prompt('Ingrese un mes en formato numérico (del 1 al 12)'))
     let anio=parseInt(prompt('Ingrese un año (aaaa)'))
-    getElId('agregarDetalles1').innerHTML=""
-    getElId('agregarDetalles1').innerHTML=`<p>La sucursal que mas vendió en el periodo ${mes}/${anio} fue ${sucursalDelMes(mes, anio)}</p>`+ `<p>La vendedora que mas vendió en el periodo ${mes}/${anio} fue ${vendedoraDelMes(mes, anio)}</p>`
     getElId('menos1').addEventListener('click', (e)=>{
         getElId('detalles1').classList.add('hidden')
     }) 
+    getElId('agregarDetalles1').innerHTML=""
+    if(huboVentas(mes,anio)){
+        getElId('agregarDetalles1').innerHTML=`<p>La sucursal que mas vendió en el periodo ${mes}/${anio} fue: ${sucursalDelMes(mes, anio)}
+    </p>`+ `<p>La vendedora que mas vendió en el periodo ${mes}/${anio} fue: ${vendedoraDelMes(mes, anio)}</p>`
+    }else{getElId('agregarDetalles1').innerHTML=`<p>No hubo ventas en el periodo ingresado</p>`}
 })
-
 

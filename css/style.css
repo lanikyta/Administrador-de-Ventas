@@ -81,7 +81,7 @@ span{
     margin: 1% auto;
     margin-top: 2%;
 }
-.sup p{
+.sup p, .sup li{
     padding: 2%;
 }
 .overlay{
@@ -200,7 +200,7 @@ h2{
     .general{
         flex-basis: 90%;
         text-align: center;
-        font-size: 2vw;
+        font-size: 3vw;
     }
     #divVentas{
         font-size: 1.8vw;
@@ -209,7 +209,10 @@ h2{
         text-align: center;
     }
     span{
-        font-size: 2vw;
+        font-size: 3.5vw;
+    }
+    h1{
+        font-size: 3.5vw;
     }
     .sup{
         height: 25em;
