@@ -120,7 +120,11 @@ span{
     margin: 0% auto;
     color: white;
     font-family: 'Gluten', cursive;
+    font-size: 90%;
     z-index: 102;
+}
+.modal h1{
+    font-size: 2em;
 }
 form{
     display: flex;
@@ -137,10 +141,12 @@ input{
     background-color: rgb(243, 193, 201);
     border-radius: 10px;
     font-family: 'Merienda', cursive;
+    font-size: 1.2em;
 }
 label{
     width: 90%;
     margin: 2% auto;
+    font-size: 1.4em;
 }
 select{
     width: 90%;
@@ -148,6 +154,7 @@ select{
     background-color: rgb(243, 193, 201);
     border-radius: 10px;
     font-family: 'Merienda', cursive;
+    font-size: 1.2em;
 }
 .hidden{
     display: none;
@@ -157,6 +164,8 @@ select{
     border-radius: 10px;
     margin: 2%;
     cursor: pointer;
+    font-family: 'Merienda', cursive;
+    font-size: 100%;
 }
 .cancelar{
     background-color: rgb(224, 102, 46);
@@ -202,9 +211,7 @@ h2{
         text-align: center;
         font-size: 3vw;
     }
-    #divVentas{
-        font-size: 1.8vw;
-    }
+   
     td, th{
         text-align: center;
     }
@@ -217,59 +224,41 @@ h2{
     .sup{
         height: 25em;
     }
-    /*h1{
-        font-size: 2.5rem;
+    #contenedorTabla{
+        overflow-x: scroll;
     }
-    .segunda, .cuarta{
-        margin: 4% auto;
-        padding-top: 8%;
-        width: 90%;
+    #tablaVentas{
+        font-size: 2.4vw;
+        width: 55em;
     }
-    .quinta{
-        width: 90%;
-        flex-wrap: wrap;
+    .btngral{
+        font-size: 0.8em;
     }
-    .c1{
-        width: 45%;
-        margin: 3% 1%;
-        padding: 1%;
-    }*/
+    .btnacciones{
+        font-size: 1em;
+    }
+    .modal{
+        width: 18em;
+        position: fixed;
+        top: 15%;
+        left: 15%;
+        right: 15%;
+        
+    }
 }
 @media (max-width: 425px){
-
-    .divflex{
-        flex-direction: column;
-        justify-content: space-around;
-    }
-    .primera{
+    .modal{
+        width: 15em;
+        position: fixed;
+        top: 10%;
+        left: 10%;
+        right: 10%;
         
-        padding-top: 2%;
     }
-    .imagen{
-        flex-basis: 75%;
+    .modal h1{
+        font-size: 1.2em;
     }
-    .c1{
-        width: 75%;
-        margin: 1% auto;
+    input, label, select{
+        font-size: 0.8em;
     }
-    .quinta{
-        flex-direction: column;
-        padding: 2%;
-    }
-    .columna{
-        text-align: justify;
-    }
-    .cajaform{
-        margin: 2%;
-    }
-    .columna .small{
-        flex-basis: 90%;
-    }
-    .footli{
-        display: none;
-    }
-    footer .menu{
-        display: block;
-    }
-        
 }
