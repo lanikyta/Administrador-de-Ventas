@@ -147,7 +147,7 @@ const crearTablaVentas=()=>{
     for(let i = 0; i < ventas.length; i++){
         const crearFilasTabla=document.createElement('tr')
         tablaVentas.appendChild(crearFilasTabla);
-            crearFilasTabla.innerHTML = `<td>${formatDateToString1(ventas[i].fecha)}</td>` + `<td>${ventas[i].nombreVendedora}</td>` + `<td>${ventas[i].componentes}</td>` + `<td>${ventas[i].sucursal}</td>` + `<td>$${precioMaquina(ventas[i].componentes)}</td>` + `<td><button id="${i}" class="btnacciones verde">&nbsp;<i class="fas fa-edit"></i>&nbsp;</button><button id="${i}" class="btnacciones rojo"><i class="fas fa-trash-alt"></i></button></td>`
+            crearFilasTabla.innerHTML = `<td>${formatDateToString1(ventas[i].fecha)}</td>` + `<td>${ventas[i].nombreVendedora}</td>` + `<td>${ventas[i].componentes}</td>` + `<td>${ventas[i].sucursal}</td>` + `<td>$${precioMaquina(ventas[i].componentes)}</td>` + `<td><button id="${i}" class="btnacciones verde">&nbsp;<i class="fas fa-edit"></i></button><button id="${i}" class="btnacciones rojo"><i class="fas fa-trash-alt"></i></button></td>`
     }
     crearTablaVentasSucursal()
     cargarDatosRender()
@@ -254,6 +254,7 @@ const getData=()=>{
     for (let x = 0; x < selectComponentes.selectedOptions.length; x++) {
             componentesVenta[x]=(selectComponentes.selectedOptions[x].value)
     }
+    
     sucursal = selectSucursal.value
     fecha = selectFecha.value
 }
@@ -311,6 +312,7 @@ const getDataEditVenta = () =>{
     componentesVentaE = []
     for (let x = 0; x < selectComponentesE.selectedOptions.length; x++) {
             componentesVentaE[x]=(selectComponentesE.selectedOptions[x].value)
+           
     }
     sucursalE = selectSucursalE.value
     fechaE = selectFechaE.value

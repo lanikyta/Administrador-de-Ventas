@@ -74,6 +74,7 @@ span{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 4%;
 }
 .destacados{
     width: 90%;
@@ -190,7 +191,7 @@ h2{
     cursor: pointer;
     background-color: inherit;
     border: none;
-    font-size: 1vw;
+    font-size: 1.3vw;
 }
 .verde{
     color: rgb(111, 137, 223);
@@ -245,6 +246,9 @@ h2{
         right: 15%;
         
     }
+    .header{
+        box-shadow: 2px 1px 24px 9px #6093f3;
+    }
 }
 @media (max-width: 425px){
     .modal{
@@ -260,5 +264,11 @@ h2{
     }
     input, label, select{
         font-size: 0.8em;
+    }
+    .btnacciones{
+        font-size: 1.1em;
+    }
+    #tablaVentas{
+        font-size: 2.8vw;
     }
 }
